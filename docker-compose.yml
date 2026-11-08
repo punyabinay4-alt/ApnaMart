@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: apnamart-mongodb
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: ./backend
+    container_name: apnamart-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/apnamart
+      - ADMIN_EMAIL=swainpunyabinay@gmail.com
+    depends_on:
+      - mongodb
