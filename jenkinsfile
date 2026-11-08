@@ -1,14 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                echo 'Checking out code from GitHub...'
+                git branch: 'master', url: 'https://github.com/punyabinay4-all/ApnaMart'
             }
         }
-        stage('Build & Test') {
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing Node.js dependencies...'
+                // sh 'npm install'
+            }
+        }
+        stage('Build Application') {
             steps {
                 echo 'Building ApanaMart application...'
+                // sh 'npm run build'
             }
         }
     }
