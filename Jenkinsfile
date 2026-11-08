@@ -1,21 +1,29 @@
 pipeline {
     agent any
+    
     stages {
-        stage('Checkout Code') {
+        stage('Frontend Build') {
             steps {
-                git branch: 'master', url: 'https://github.com/punyabinay4-all/ApnaMart'
+                echo 'Building Frontend (React)...'
+                dir('frontend') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
             }
         }
-        stage('Install Dependencies') {
+        
+        stage('Backend Dependencies') {
             steps {
-                echo 'Installing Node.js dependencies...'
-                // sh 'npm install'
+                echo 'Installing Backend (Node.js) dependencies...'
+                dir('backend') {
+                    sh 'npm install'
+                }
             }
         }
-        stage('Build Application') {
+        
+        stage('Success') {
             steps {
-                echo 'Building ApanaMart application...'
-                // sh 'npm run build'
+                echo 'ApnaMart Full-Stack Pipeline Build Successful!'
             }
         }
     }
